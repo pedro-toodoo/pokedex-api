@@ -2,21 +2,21 @@ from django.shortcuts import render
 import requests
 from django.http import JsonResponse
 
-#listas auxiliares
-tipo = [] #aux tipo
-habil = [] #aux habilidade
-lista_hab = [] 
-lista_tipo = []
-lista_aux = []
-lista_todos = []
-
-#dicionários 
-dicio_stat = {}
-dicio_todos = {}
-dicio_aux = {}
-
 def pokemons(request):
-    for i in range(1, 11):
+    #listas auxiliares
+    tipo = [] #aux tipo
+    habil = [] #aux habilidade
+    lista_hab = [] 
+    lista_tipo = []
+    lista_aux = []
+    lista_todos = []
+
+    #dicionários 
+    dicio_stat = {}
+    dicio_todos = {}
+    dicio_aux = {}
+
+    for i in range(1, 51):
         url = f"https://pokeapi.co/api/v2/pokemon/{i}"
         requisicao = requests.get(url)
 
@@ -58,6 +58,7 @@ def pokemons(request):
         lista_aux.append(dicio_aux)
 
         dicio_todos['pokemons'] = lista_aux
+
         habil.clear()
         tipo.clear()
         dicio.clear()
