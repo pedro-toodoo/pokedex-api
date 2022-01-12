@@ -11,5 +11,6 @@ route.register(r'pokemons', pv.PokemonsViewSet, basename='pokemons')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(route.urls))
+    path('', include(route.urls)),
+    path('api/v1/', include('pokemons.urls'))
 ]
