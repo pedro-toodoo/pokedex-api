@@ -6,10 +6,10 @@ from rest_framework import routers
 from pokemons.api import viewsets as pv
 
 route = routers.DefaultRouter()
-route.register(r'pokemons', pv.PokemonsViewSet, basename='pokemons')
-
+route.register(r'lista', pv.PokemonsViewSet, basename='lista')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(route.urls))
+    path('', include(route.urls)),
+    path('api/v1/', include('pokemons.urls'))
 ]
