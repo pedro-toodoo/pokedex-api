@@ -34,6 +34,7 @@ A nova API desenvolvida em Python, para poder ser consumida pelas aplicações A
 - Tipo {nome, cor}
 - Peso
 - Altura
+- Habilidades
 - Estatísticas {hp, attack, defense, special-attack, special-defense, speed}
 - Link_img
 
