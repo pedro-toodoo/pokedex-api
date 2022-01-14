@@ -55,6 +55,7 @@ A nova API desenvolvida em Python, para poder ser consumida pelas aplicações A
     ```
     git add .
     git commit -m "deploy"
+    heroku addons:create heroku-postgresql:hobby-dev
     git push heroku master
     ```
     
