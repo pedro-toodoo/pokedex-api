@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from rest_framework import views
 from rest_framework.response import Response
 from pokemons.api import serializers
+import asyncio
 
 def pokemons():
     #listas auxiliares
@@ -12,14 +13,16 @@ def pokemons():
     habil = [] #aux habilidade
     stat = [] #aux statisticas
     cor = [] #aux cor do tipo
+    lista_hab = [] 
     lista_aux = []
+    lista_stat = []
+    lista_tipo = []
+    lista_tipo_cor = []
 
     #dicionários 
-    dicio_stat = {}
-    dicio_tipo_cor = {}  
     dicio_todos = {}
     dicio_aux = {}
-    dicio_cor = {}      
+    dicio_tipo_cor = {}        
     dicio_cor = {
             'rock': '#B69E31',
             'ghost': '#70559B',
@@ -50,15 +53,15 @@ def pokemons():
         except ValueError:
             print("ERRO TIPO")
 
+
         dicio = {
             'ID': lista['id'],
             'Nome': lista['name'],
-            'Tipo': cor, 
-            #'tipo_cor': cor,
+            'Tipo': lista_tipo_cor, 
             'Peso': lista['weight'],
             'Altura': lista['height'],
-            'Habilidades': habil,
-            'Estatisticas': stat,
+            'Habilidades': lista_hab,
+            'Estatisticas': lista_stat,
             'Link_img': lista['sprites']['other']['official-artwork']['front_default']
         }
 
@@ -75,14 +78,10 @@ def pokemons():
             tipo.append(t['type']['name'])
             for i, v in enumerate(dicio_cor):
                 if t['type']['name'] == v:
-                    cor.append({v: dicio_cor[v]})
+                    dicio_tipo_cor['nome'] = v
+                    dicio_tipo_cor['cor'] = dicio_cor[v]
+                    cor.append(dicio_tipo_cor.copy())
         dicio['Tipo'] = cor[:]
-
-        '''for c in dicio['Tipo']:
-            for i, v in enumerate(dicio_cor):
-                if c == v:
-                    cor.append(dicio_cor[c])
-        dicio['tipo_cor'] = cor[:]'''
 
 
         dicio_aux = dicio.copy()
@@ -93,6 +92,7 @@ def pokemons():
         habil.clear()
         tipo.clear()
         stat.clear()
+        dicio_tipo_cor.clear()
         cor.clear()
         dicio.clear()   
 
