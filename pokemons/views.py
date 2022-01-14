@@ -12,18 +12,14 @@ def pokemons():
     habil = [] #aux habilidade
     stat = [] #aux statisticas
     cor = [] #aux cor do tipo
-    lista_hab = [] 
-    lista_tipo = []
     lista_aux = []
-    lista_stat = []
-    lista_tipo_cor = []
 
     #dicionários 
     dicio_stat = {}
+    dicio_tipo_cor = {}  
     dicio_todos = {}
     dicio_aux = {}
-    dicio_cor = {}
-    dicio_tipo = {}        
+    dicio_cor = {}      
     dicio_cor = {
             'rock': '#B69E31',
             'ghost': '#70559B',
@@ -57,37 +53,36 @@ def pokemons():
         dicio = {
             'ID': lista['id'],
             'Nome': lista['name'],
-            'Tipo': lista_tipo, 
-            'tipo_cor': lista_tipo_cor,
+            'Tipo': cor, 
+            #'tipo_cor': cor,
             'Peso': lista['weight'],
             'Altura': lista['height'],
-            'Habilidades': lista_hab,
-            'Estatisticas': lista_stat,
+            'Habilidades': habil,
+            'Estatisticas': stat,
             'Link_img': lista['sprites']['other']['official-artwork']['front_default']
         }
 
         for a in lista['abilities']:
             habil.append(a['ability']['name'])
         dicio['Habilidades'] = habil[:]
-        #lista_hab.append(dicio.copy())
 
 
         for s in lista['stats']:
             stat.append({s['stat']['name']: s['base_stat']}) 
         dicio['Estatisticas'] = stat[:] 
-        #lista_stat.append(dicio.copy())
         
         for t in lista['types']:
             tipo.append(t['type']['name'])
-        dicio['Tipo'] = tipo[:]
-        #lista_tipo.append(dicio.copy())
+            for i, v in enumerate(dicio_cor):
+                if t['type']['name'] == v:
+                    cor.append({v: dicio_cor[v]})
+        dicio['Tipo'] = cor[:]
 
-        for c in dicio['Tipo']:
+        '''for c in dicio['Tipo']:
             for i, v in enumerate(dicio_cor):
                 if c == v:
                     cor.append(dicio_cor[c])
-        dicio['tipo_cor'] = cor[:]
-        lista_tipo_cor.append(dicio.copy())
+        dicio['tipo_cor'] = cor[:]'''
 
 
         dicio_aux = dicio.copy()
